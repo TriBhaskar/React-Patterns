@@ -16,16 +16,12 @@ export function useAccordionContext() {
 
 export default function Accordion({ children, className }) {
   const [openItemId, setOpenItemId] = useState();
-  function openItem(id) {
-    setOpenItemId(id);
-  }
-  function closeItem() {
-    setOpenItemId(null);
+  function toggleItem(id) {
+    setOpenItemId((prevId) => (prevId === id ? undefined : id));
   }
   const contextValue = {
     openItemId: openItemId,
-    openItem,
-    closeItem,
+    toggleItem: toggleItem,
   };
   return (
     <AccordionContext.Provider value={contextValue}>
